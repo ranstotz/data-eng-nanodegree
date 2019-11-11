@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 # Lesson 1: Creating databases and tables in Postgres
+# Run locally (I already installed [I think]):
+# https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04
 
 import psycopg2
 
