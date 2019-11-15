@@ -4,7 +4,8 @@
 .\#*
 
 # Data sets
-**/data/**
+# add if necessary to remove datasets due to size
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
