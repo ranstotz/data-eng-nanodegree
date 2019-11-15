@@ -8,7 +8,7 @@
 # Import Apache Cassandra python package
 import cassandra
 
-# ### Create a connection to the database
+# Create a connection to the database
 from cassandra.cluster import Cluster
 try:
     # If you have a locally installed Apache Cassandra instance
