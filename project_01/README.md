@@ -25,3 +25,7 @@ https://github.com/Interana/eventsim
 ### Running Postgres locally
 
 https://pythonspot.com/python-database-postgresql/
+
+## Progress
+
+- Created sparkifydb locally in postgres as per connection request in etl.ipynb.
