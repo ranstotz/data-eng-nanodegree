@@ -21,3 +21,7 @@ http://millionsongdataset.com/
 ### Second Dataset Generator Code
 
 https://github.com/Interana/eventsim
+
+### Running Postgres locally
+
+https://pythonspot.com/python-database-postgresql/
