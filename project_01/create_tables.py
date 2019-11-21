@@ -1,5 +1,5 @@
 import psycopg2
-from sql_queries import create_table_queries, drop_table_queries, test_table
+from sql_queries import create_table_queries, drop_table_queries, print_table
 
 
 def create_database():
@@ -42,6 +42,7 @@ def create_database():
         print("Error creating database")
         print(e)
 
+    conn.set_session(autocommit=True)
     cur = conn.cursor()
     return cur, conn
 
