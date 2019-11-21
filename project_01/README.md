@@ -30,4 +30,4 @@ https://pythonspot.com/python-database-postgresql/
 
 - Created tables using sql_queries.py and create_tables.py.
 
-- Next step is to work on etl.py
+- Next step is to work on etl.py asap
