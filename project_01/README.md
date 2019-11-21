@@ -28,4 +28,6 @@ https://pythonspot.com/python-database-postgresql/
 
 ## Progress
 
-- Created sparkifydb locally in postgres as per connection request in etl.ipynb.
+- Created tables using sql_queries.py and create_tables.py.
+
+- Next step is to work on etl.py
