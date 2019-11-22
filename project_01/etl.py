@@ -17,13 +17,14 @@ def process_song_file(cur, filepath):
         cur.execute(song_table_insert, song_data)
     except psycopg2.Error as e:
         print("Error inserting into songs table.")
+        print("filepath: ", filepath)
         print(e)
 
     # insert artist record
     artist_data = (df.song_id, df.artist_name, df.artist_location,
                    df.artist_latitude, df.artist_longitude)
-    
-    try: 
+
+    try:
         cur.execute(artist_table_insert, artist_data)
     except psycopg2.Error as e:
         print("Error inserting into artists table.")
