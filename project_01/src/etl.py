@@ -33,16 +33,22 @@ def process_song_file(cur, filepath):
 
 def process_log_file(cur, filepath):
     # open log file
-    df = pd.read_json(filepath, typ='series', lines=True)
+    df = pd.read_json(filepath, lines=True)
     print("df: ", df)
 
-    # # filter by NextSong action
-    # df = ''
+    # filter by NextSong action
+    df = df.loc[df['page'] == 'NextSong']
+    print("dfnumero dos: ", df)
 
     # # convert timestamp column to datetime
     # t = ''
+    print("datetime ", pd.to_datetime(1541105830796, unit='ms').to_pydatetime())
 
     # # insert time data records
+    # # this will be where the records are converted to required format
+    # # Extract the timestamp, hour, day, week of year, month, year, and
+    # # weekday from the `ts` column and set `time_data` to a list containing
+    # # these values in order."
     # time_data = ''
     # column_labels = ''
     # time_df = ''
