@@ -99,8 +99,13 @@ def main():
     conn.set_session(autocommit=True)
     cur = conn.cursor()
 
-    process_data(cur, conn, filepath='data/song_data', func=process_song_file)
-    # process_data(cur, conn, filepath='data/log_data', func=process_log_file)
+    # Note that these are technically relative paths to project dir
+    # since the run script executes this script from the parent dir.
+    song_data_filepath = 'data/song_data'
+    log_data_filepath = 'data/log_data'
+    process_data(cur, conn, filepath=song_data_filepath,
+                 func=process_song_file)
+    # process_data(cur, conn, filepath=log_data_filepath, func=process_log_file)
 
     conn.close()
 
