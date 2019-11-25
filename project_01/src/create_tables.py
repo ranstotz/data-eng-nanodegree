@@ -3,6 +3,9 @@ from sql_queries import create_table_queries, drop_table_queries, print_table
 
 
 def create_database():
+    """ Function to create the sparkifydb and return a 
+        connection and cursor to it. """
+
     # connect to default database
     try:
         conn = psycopg2.connect(
@@ -48,7 +51,11 @@ def create_database():
 
 
 def drop_tables(cur, conn):
+    """ Function to drop all tables prior to executing script
+        to ensure old data is not used.
+    """
     for query in drop_table_queries:
+        # drop tables
         try:
             cur.execute(query)
         except psycopg2.Error as e:
@@ -57,7 +64,10 @@ def drop_tables(cur, conn):
 
 
 def create_tables(cur, conn):
+    """ Function to create the tables provided in sql_queries.py.
+    """
     for query in create_table_queries:
+        # create tables
         try:
             cur.execute(query)
         except psycopg2.Error as e:
@@ -66,11 +76,18 @@ def create_tables(cur, conn):
 
 
 def main():
+    """ Main function for create_tables.py. Handles connections
+        to the database and executes relevant functions.
+    """
+
+    # create connection to database
     cur, conn = create_database()
 
+    # ensure all old tables are dropped and new ones are created
     drop_tables(cur, conn)
     create_tables(cur, conn)
 
+    # close connection
     conn.close()
 
 

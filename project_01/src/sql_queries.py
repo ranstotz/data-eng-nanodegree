@@ -11,7 +11,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 # CREATE TABLES
 
 songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplays \
-    (songplay_id int PRIMARY KEY, start_time bigint, user_id varchar, level varchar, \
+    (songplay_id varchar PRIMARY KEY, start_time timestamp, user_id varchar, level varchar, \
         song_id varchar, artist_id varchar, session_id int, location varchar, \
             user_agent varchar)
 """)
@@ -30,8 +30,8 @@ artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists \
 """)
 
 time_table_create = ("""CREATE TABLE IF NOT EXISTS time \
-    (start_time bigint PRIMARY KEY, hour int, day varchar, week int, month int, year int, \
-        weekday boolean )
+    (start_time timestamp PRIMARY KEY, hour int, day int, week int, month int, year int, \
+        weekday int )
 """)
 
 # INSERT RECORDS
@@ -40,7 +40,9 @@ songplay_table_insert = ("""INSERT INTO songplays (songplay_id, start_time, user
         session_id, location, user_agent) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
 """)
 
-user_table_insert = ("""INSERT INTO users (user_id, first_name, last_name, gender, level) VALUES (%s, %s, %s, %s, %s)
+# Use upsert clause to prevent duplicate inserts. This was written for log file reads.
+user_table_insert = ("""INSERT INTO users (user_id, first_name, last_name, gender, level) VALUES (%s, %s, %s, %s, %s) \
+    ON CONFLICT (user_id) DO NOTHING
 """)
 
 song_table_insert = ("""INSERT INTO songs (song_id, title, artist_id, year, duration) VALUES (%s, %s, %s, %s, %s)
@@ -51,14 +53,13 @@ artist_table_insert = ("""INSERT INTO artists \
 """)
 
 time_table_insert = ("""INSERT INTO time \
-    (start_time, hour, day, week, month, year, weekday) VALUES (%s, %s, %s, %s, %s, %s, %s)
+    (start_time, hour, day, week, month, year, weekday) VALUES (%s, %s, %s, %s, %s, %s, %s) \
+        ON CONFLICT (start_time) DO NOTHING
 """)
-
-# Test song tables to ensure existence
 
 
 def print_table(cur, table_name):
-
+    """ Function to print the contents of table ensuring inserts were accurately executed. """
     query = "SELECT * FROM " + table_name + " LIMIT 5;"
     try:
         cur.execute(query)
@@ -72,7 +73,7 @@ def print_table(cur, table_name):
 
 
 # FIND SONGS
-song_select = ("""SELECT * FROM songs
+song_select = ("""SELECT * FROM songs JOIN artists ON artists.name=%s WHERE songs.title=%s AND songs.duration=%s
 """)
 
 # QUERY LISTS
