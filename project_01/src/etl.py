@@ -71,14 +71,13 @@ def process_log_file(cur, filepath):
         except psycopg2.Error as e:
             print("Error inserting time table row.")
             print(e)
-    # print_table(cur, 'time')
 
     # load user table by selecting relevant dataframe columns
     user_df = df[['userId', 'firstName', 'lastName', 'gender', 'level']]
 
     # insert user records, use 'ON CONFLICT' clause for this. See sql_queries.py.
     for i, row in user_df.iterrows():
-
+        # insert into user table
         try:
             cur.execute(user_table_insert, list(row))
         except psycopg2.Error as e:
@@ -95,6 +94,7 @@ def process_log_file(cur, filepath):
             song_row = cur.fetchone()
             if song_row != None:
                 print("Match on row at index: ", index)
+                # extract the matches into song and artist id
                 try:
                     song_id, artist_id = song_row[0], song_row[2]
                 except e:

@@ -2,9 +2,9 @@
 
 # Driver to execute all scripts in required order.
 
-echo "Starting ${0##*/} "
+echo -e "\nStarting ${0##*/} for Project 01 - Data Modeling with Postgres \n"
 python3 src/create_tables.py
-echo "========== Executed create_tables.py =========="
+echo -e "\n========== Executed create_tables.py ==========\n"
 python3 src/etl.py 
-echo "========== Executed etl.py =========="
-echo "========== End of ${0##*/} script =========="
+echo -e "\n========== Executed etl.py =========="
+echo -e "========== End of ${0##*/} script ==========\n"
