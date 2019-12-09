@@ -3,8 +3,8 @@
 \#*\#
 .\#*
 
-# Data sets
-# add if necessary to remove datasets due to size
+# project notes
+notes/
 
 
 # Byte-compiled / optimized / DLL files
