@@ -36,16 +36,16 @@ A run script (run.sh) was created to execute the code. Use `bash run.sh` to get 
 
 The results per each query was as follows:
 
-**Query 1:**
-Faithless Music Matters (Mark Knight Dub) 495.30731201171875
+**Query 1:**\
+Faithless Music Matters (Mark Knight Dub) 495.30731201171875\
 
-**Query 2:**
-Down To The Bone Keep On Keepin' On Sylvie Cruz
-Three Drives Greece 2000 Sylvie Cruz
-Sebastien Tellier Kilometer Sylvie Cruz
-Lonnie Gordon Catch You Baby (Steve Pitron & Max Sanna Radio Edit) Sylvie Cruz
+**Query 2:**\
+Down To The Bone Keep On Keepin' On Sylvie Cruz\
+Three Drives Greece 2000 Sylvie Cruz\
+Sebastien Tellier Kilometer Sylvie Cruz\
+Lonnie Gordon Catch You Baby (Steve Pitron & Max Sanna Radio Edit) Sylvie Cruz\
 
-**Query 3:**
-Jacqueline Lynch
-Tegan Levine
-Sara Johnson
+**Query 3:**\
+Jacqueline Lynch\
+Tegan Levine\
+Sara Johnson\
