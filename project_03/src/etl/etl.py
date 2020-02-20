@@ -41,6 +41,7 @@ def main():
         print("Error connecting and/or creating a cursor with db. ")
         print(e)
 
+    # tables loaded for now (small subset)
     load_staging_tables(cur, conn)
     # insert_tables(cur, conn)
 
