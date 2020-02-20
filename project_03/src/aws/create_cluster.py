@@ -51,7 +51,7 @@ def main():
                             aws_secret_access_key=SECRET)
 
     print("Cluster status prior to creation: ")
-    cluster_status.main()
+    # cluster_status.main()
 
     # Create IAM role if it does not exist
     try:
@@ -95,6 +95,7 @@ def main():
             # Roles (for s3 access)
             IamRoles=[roleArn]
         )
+        print("Cluster creating...")
     except Exception as e:
         print(e)
 
