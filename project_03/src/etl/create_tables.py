@@ -52,6 +52,7 @@ def main():
         print(e)
 
     # First drop tables if they exist, then create the tables
+    # print("drop/create tables commented out since loaded.")
     drop_tables(cur, conn)
     create_tables(cur, conn)
 

@@ -1,7 +1,7 @@
 import configparser
 import psycopg2
 import boto3
-from sql_queries import copy_table_queries, insert_table_queries
+from sql_queries import copy_table_queries, insert_table_queries, counting_queries
 
 
 def load_staging_tables(cur, conn):
@@ -27,6 +27,20 @@ def insert_tables(cur, conn):
             print(e)
 
 
+def count_queries(cur, conn):
+
+    for query in counting_queries:
+        try:
+            cur.execute(query)
+            row = cur.fetchone()
+            if row is not None:
+                print(row)
+            # conn.commit()
+        except psycopg2.Error as e:
+            print("Error inserting into tables.")
+            print(e)
+
+
 def main():
     config = configparser.ConfigParser()
     config.read('../config/dwh.cfg')
@@ -35,6 +49,7 @@ def main():
         print("Create dwh connection")
         conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(
             *config['CLUSTER'].values()))
+        conn.set_session(autocommit=True)
         cur = conn.cursor()
         print("Redshift connection completed")
     except psycopg2.Error as e:
@@ -42,8 +57,9 @@ def main():
         print(e)
 
     # tables loaded for now (small subset)
-    load_staging_tables(cur, conn)
-    # insert_tables(cur, conn)
+    # load_staging_tables(cur, conn)
+    insert_tables(cur, conn)
+    count_queries(cur, conn)
 
     # Close connection to dwh
     try:
