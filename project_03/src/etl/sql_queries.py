@@ -11,7 +11,7 @@ SONG_DATA_BUCKET = config['S3']['SONG_DATA']
 LOG_JSONPATH = config['S3']['LOG_JSONPATH']
 
 # DROP TABLES
-
+# temp remove staging drops to avoid the long wait
 # staging_events_table_drop = "DROP TABLE IF EXISTS staging_events"
 # staging_songs_table_drop = "DROP TABLE IF EXISTS staging_songs"
 songplay_table_drop = "DROP TABLE IF EXISTS songplays"
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS time (
 staging_events_copy = ("""
 copy staging_events from {}
 iam_role '{}'
-region 'us-east-1'
+region 'us-west-2'
 json {}
 TRUNCATECOLUMNS BLANKSASNULL EMPTYASNULL
 """).format(LOG_DATA_BUCKET, IAM_ARN, LOG_JSONPATH)
@@ -146,7 +146,7 @@ TRUNCATECOLUMNS BLANKSASNULL EMPTYASNULL
 staging_songs_copy = ("""
 copy staging_songs from {}
 iam_role '{}'
-region 'us-east-1'
+region 'us-west-2'
 json 'auto'
 TRUNCATECOLUMNS BLANKSASNULL EMPTYASNULL
 """).format(SONG_DATA_BUCKET, IAM_ARN)
@@ -234,12 +234,12 @@ SELECT COUNT (*) AS cnt FROM songplays
 
 # QUERY LISTS
 
-# create_table_queries = [staging_events_table_create, staging_songs_table_create,
-# songplay_table_create, user_table_create, song_table_create, artist_table_create, time_table_create]
+create_table_queries = [staging_events_table_create, staging_songs_table_create,
+                        songplay_table_create, user_table_create, song_table_create, artist_table_create, time_table_create]
 
 # without events/songs
-create_table_queries = [songplay_table_create, user_table_create,
-                        song_table_create, artist_table_create, time_table_create]
+# create_table_queries = [songplay_table_create, user_table_create,
+# song_table_create, artist_table_create, time_table_create]
 
 # drop_table_queries = [staging_events_table_drop, staging_songs_table_drop,
 #   songplay_table_drop, user_table_drop, song_table_drop, artist_table_drop, time_table_drop]
@@ -253,10 +253,10 @@ drop_table_queries = [songplay_table_drop, user_table_drop,
 # don't copy for now
 copy_table_queries = []
 
-# insert_table_queries = [songplay_table_insert, user_table_insert,
-# song_table_insert, artist_table_insert, time_table_insert]
+insert_table_queries = [songplay_table_insert, user_table_insert,
+                        song_table_insert, artist_table_insert, time_table_insert]
 
-insert_table_queries = []
+# insert_table_queries = []
 
 
 counting_queries = [count_staging_songs, count_staging_events,
