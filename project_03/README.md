@@ -20,3 +20,9 @@ After the infrastructure could be reliably produced, maintained, and cleaned up,
 
 Once the staging tables were in place, the analytic tables needed to be designed and implemented through a star schema. Below is the star schema diagram to show the relationships between the data:
 ![Star Schema Diagram](./assets/star_schema_diagram.png)
+
+After the schema was designed, the ETL process could begin in the `./src/etc` directory. All queries required were placed inside `sql_queries.py`. Next, `create_tables.py` was implemented to generate all necessary tables. Note that this script, along with the others, were implemented piece-meal to create and populate the staging tables first, then for the analytic tables. Next, `etl.py` was used to insert all of the data from the staging tables into the analytics tables. the `DISTINCT` keyword was used to prevent duplicates. Additionally, there was a check to ensure the table primary key was `NOT NULL`.
+
+Lastly, to check the integrity of the data, simple queries were used to understand the expected format and count of data such as `SELECT * FROM any_table LIMIT 10` and `SELECT count (*) FROM any_table`.
+
+Future steps for the project would be to understand the anticipated analytic queries for the tables and use distribution and sorting keys to increase the analytic query time and efficiency.
